@@ -42,7 +42,7 @@ export default {
           break;
       }
 
-      return `font-bold text-anthracite ${sizeClass} mb-4`;
+      return `text-app-header ${sizeClass} mb-4`;
     },
   },
 };

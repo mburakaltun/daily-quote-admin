@@ -1,22 +1,20 @@
 <template>
-  <div class="dashboard">
+  <div class="create-quote-view">
     <CreateQuoteForm> </CreateQuoteForm>
-    <QuoteList> </QuoteList>
   </div>
 </template>
 
 <script>
 import CreateQuoteForm from "@/components/quote/CreateQuoteForm.vue";
-import QuoteList from "@/components/quote/QuoteList.vue";
 
 export default {
   name: 'Dashboard',
-  components: {QuoteList, CreateQuoteForm},
+  components: {CreateQuoteForm},
 };
 </script>
 
 <style scoped>
-.dashboard {
+.create-quote-view {
   max-width: 1200px;
   margin: 0 auto;
 }

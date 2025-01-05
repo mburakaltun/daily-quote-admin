@@ -1,26 +1,31 @@
 <template>
-  <textarea
-      :id="id"
-      :class="[
-      'bg-pastel-light-orange',
-      'w-full',
-      'p-4',
-      'text-black',
-      'py-2 px-4',
-      'border-t-2',
-      'border-l-2',
-      'border-black',
-      'border-b-2',   // Thicker bottom border
-      'border-r-2',    // Thicker right border
-      'rounded-none',   // No border radius
-      'focus:outline-none',
-      'focus:border-b-4',  // Thicker bottom border on focus
-      'focus:ring-0',      // Remove the default ring effect
-      'box-border'         // Ensure padding and border are included in the total width/height
-    ]"
-      :rows="rows"
-      placeholder="Enter text"
-  ></textarea>
+  <div class="relative">
+    <textarea
+        :id="id"
+        :class="[
+        'bg-input-background',
+        'w-full',
+        'p-4',
+        'text-black',
+        'py-2 px-4',
+        'border-t-2',
+        'border-l-2',
+        'border-black',
+        'border-b-2',
+        'border-r-2',
+        'rounded-none',
+        'focus:outline-none',
+        'focus:ring-0',
+        'focus:border-input-focus-border',
+        'focus:border-2',
+        'box-border',
+        'focus:shadow-outline'
+      ]"
+        :rows="rows"
+        :placeholder="placeholder"
+    ></textarea>
+    <span class="focus-border"></span>
+  </div>
 </template>
 
 <script>
@@ -34,14 +39,30 @@ export default {
     rows: {
       type: Number,
       default: 4,
-    }
+    },
+    placeholder: {
+      type: String,
+      default: 'type something...',
+    },
   },
 };
 </script>
 
 <style scoped>
-/* Ensure border and padding don't affect the overall size */
 textarea {
   box-sizing: border-box; /* Include padding and border in the element's total width/height */
+}
+
+.relative {
+  position: relative;
+}
+
+textarea::placeholder {
+  color: #777777;
+  font-style: italic;
+}
+
+textarea:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add box shadow on focus */
 }
 </style>

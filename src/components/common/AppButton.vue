@@ -1,18 +1,14 @@
 <template>
   <button
+      :type="type"
       :class="[
-      'bg-pastel-orange',
-      'font-bold',
-      'text-black',
-      'py-2 px-4',
-      'border-black',
-      'border-t-2',
-      'border-l-2',
-      'border-b-4',
-      'border-r-2',
+      'text-white',
+      'border-white',
       'rounded-none',
-      'hover:bg-pastel-coral',
+      'hover:bg-app-button-hover-background',
       'focus:outline-none',
+      sizeClasses,
+      'bg-app-button-background'
     ]"
   >
     {{ text }}
@@ -26,6 +22,28 @@ export default {
     text: {
       type: String,
       required: true,
+    },
+    size: {
+      type: String,
+      default: 'medium',
+      validator: value => ['small', 'medium', 'large'].includes(value),
+    },
+    type: {
+      type: String,
+      default: 'button',
+      validator: value => ['button', 'submit', 'reset'].includes(value),
+    },
+  },
+  computed: {
+    sizeClasses() {
+      switch (this.size) {
+        case 'small':
+          return 'py-1 px-3 text-sm';
+        case 'large':
+          return 'py-3 px-9 text-lg';
+        default:
+          return 'py-2 px-6 text-base';
+      }
     },
   },
 };

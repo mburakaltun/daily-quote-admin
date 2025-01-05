@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <input
+    <select
         :id="id"
         :class="[
         'bg-input-background',
@@ -16,35 +16,51 @@
         'rounded-none',
         'focus:outline-none',
         'focus:border-input-focus-border',
-        'focus:border-2',
         'focus:ring-0',
         'box-border',
         'focus:shadow-outline'
       ]"
-        :placeholder="placeholder"
-    />
-    <span class="focus-border"></span>
+        v-model="selected"
+    >
+      <option v-for="option in options" :key="option.value" :value="option.value">
+        {{ option.label }}
+      </option>
+    </select>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppInput',
+  name: 'AppDropdown',
   props: {
     id: {
       type: String,
       required: true,
     },
-    placeholder: {
+    options: {
+      type: Array,
+      required: true,
+    },
+    modelValue: {
       type: String,
-      default: 'Type something...',
+      default: '',
+    },
+  },
+  data() {
+    return {
+      selected: this.modelValue,
+    };
+  },
+  watch: {
+    selected(newValue) {
+      this.$emit('update:modelValue', newValue);
     },
   },
 };
 </script>
 
 <style scoped>
-input {
+select {
   box-sizing: border-box;
 }
 
@@ -52,12 +68,8 @@ input {
   position: relative;
 }
 
-input::placeholder {
-  color: #777777;
-  font-style: italic; /* Make placeholder text italic */
-}
-
-input:focus {
+select:focus {
+  background-color: #fff3e0; /* Change background color on focus */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add box shadow on focus */
 }
 </style>

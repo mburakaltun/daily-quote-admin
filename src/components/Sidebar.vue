@@ -1,20 +1,30 @@
 <template>
-  <div class="sidebar bg-pastel-orange text-black p-4 border-r-4 border-black h-full">
+  <div class="sidebar bg-container-background text-white p-4 border-r-4 border-black h-full">
     <ul class="sidebar-nav mt-4">
       <li class="mb-0.5 hover:bg-pastel-coral transition-all">
-        <a href="#" class="sidebar-link">Dashboard</a>
+        <router-link to="/" class="sidebar-link">
+          <font-awesome-icon icon="tachometer-alt" class="mr-2" /> Dashboard
+        </router-link>
       </li>
       <li class="mb-0.5 hover:bg-pastel-coral transition-all">
-        <a href="#" class="sidebar-link">Add Quote</a>
+        <router-link to="/createQuote" class="sidebar-link">
+          <font-awesome-icon icon="plus-circle" class="mr-2" /> Create Quote
+        </router-link>
       </li>
       <li class="mb-0.5 hover:bg-pastel-coral transition-all">
-        <a href="#" class="sidebar-link">All Quotes</a>
+        <router-link to="/allQuotes" class="sidebar-link">
+          <font-awesome-icon icon="list" class="mr-2" /> All Quotes
+        </router-link>
       </li>
       <li class="mb-0.5 hover:bg-pastel-coral transition-all">
-        <a href="#" class="sidebar-link">Analytics</a>
+        <a href="#" class="sidebar-link">
+          <font-awesome-icon icon="chart-line" class="mr-2" /> Analytics
+        </a>
       </li>
       <li class="mb-0.5 hover:bg-pastel-coral transition-all">
-        <a href="#" class="sidebar-link">Users</a>
+        <a href="#" class="sidebar-link">
+          <font-awesome-icon icon="users" class="mr-2" /> Users
+        </a>
       </li>
     </ul>
   </div>
@@ -44,7 +54,6 @@ export default {
 .sidebar-link {
   text-decoration: none;
   font-size: 1rem;
-  font-weight: bold; /* Make text bold */
   transition: font-weight 0.3s ease; /* Smooth transition */
   display: flex;
   align-items: center;

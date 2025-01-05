@@ -29,7 +29,7 @@ export default {
         sizeClass = 'text-base';
       }
 
-      return `mb-6 font-bold text-anthracite ${sizeClass}`;
+      return `mb-6 text-app-text ${sizeClass}`;
     },
   },
 };
