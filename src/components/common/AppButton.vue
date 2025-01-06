@@ -38,11 +38,11 @@ export default {
     sizeClasses() {
       switch (this.size) {
         case 'small':
-          return 'py-1 px-3 text-sm';
+          return 'py-1 px-3 text-sm rounded-md';
         case 'large':
-          return 'py-3 px-9 text-lg';
+          return 'py-3 px-9 text-lg rounded-xl';
         default:
-          return 'py-2 px-6 text-base';
+          return 'py-2 px-6 text-base rounded-lg';
       }
     },
   },

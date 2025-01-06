@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-screen">
-    <Sidebar />
-    <div class="flex-1 bg-app-background p-8 overflow-auto ml-[250px]">
+    <Sidebar :top-items="topSidebarItems" :bottom-items="bottomSidebarItems" class="flex-[1]" />
+    <div class="flex-[5] bg-app-background p-8 overflow-auto">
       <router-view />
     </div>
   </div>
@@ -9,11 +9,18 @@
 
 <script>
 import Sidebar from './components/Sidebar.vue';
+import { topSidebarItems, bottomSidebarItems } from './config/sidebarItems';
 
 export default {
   name: 'App',
   components: {
     Sidebar,
+  },
+  data() {
+    return {
+      topSidebarItems,
+      bottomSidebarItems,
+    };
   },
 };
 </script>

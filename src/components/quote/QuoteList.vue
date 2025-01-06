@@ -1,5 +1,5 @@
 <template>
-  <div class="quote-list-container mb-8 border-2 border-black p-4 bg-container-background">
+  <div class="quote-list-container mb-8 border-2 border-black p-4 bg-container-background rounded-lg">
     <AppHeading text="Quote List" size="h3"></AppHeading>
     <table class="w-full border-collapse">
       <thead>
@@ -37,7 +37,7 @@ import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
 
 const quotes = ref([
-  { id: 1, author: 'Author 1', text: 'Quote 1', type: 'West', category: 'Category 1', book: 'Book 1' },
+  { id: 1, author: 'Author 1', text: 'Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a', type: 'West', category: 'Category 1', book: 'Book 1' },
   { id: 2, author: 'Author 2', text: 'Quote 2', type: 'East', category: 'Category 2', book: 'Book 2' },
 ]);
 </script>

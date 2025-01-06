@@ -13,7 +13,7 @@ const handleSubmit = (event) => {
 </script>
 
 <template>
-  <div id="main-container" class="mb-8 border-2 border-black p-4 bg-container-background">
+  <div id="main-container" class="mb-8 border-2 border-black p-4 bg-container-background rounded-lg">
     <form @submit="handleSubmit" class="form-container">
       <AppHeading text="Create New Quote" size="h3"></AppHeading>
 

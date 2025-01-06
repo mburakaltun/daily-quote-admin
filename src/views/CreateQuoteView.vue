@@ -15,7 +15,7 @@ export default {
 
 <style scoped>
 .create-quote-view {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 </style>

@@ -19,7 +19,8 @@
         'focus:border-input-focus-border',
         'focus:border-2',
         'box-border',
-        'focus:shadow-outline'
+        'focus:shadow-outline',
+        'rounded-lg'
       ]"
         :rows="rows"
         :placeholder="placeholder"
