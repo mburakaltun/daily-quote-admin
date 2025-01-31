@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit="createQuote" class="w-full max-w-xl p-6 rounded-lg mb-8">
+    <form @submit="signUp" class="w-full max-w-xl p-6 rounded-lg mb-8">
       <AppHeading text="Sign Up" size="h3" class="text-center mb-8"></AppHeading>
       <div class="mb-4">
         <AppInputText id="email-input" placeholder="Enter email..." v-model="email" class="w-full"></AppInputText>
@@ -27,6 +27,8 @@ import AppHeading from "@/components/common/AppHeading.vue";
 import authenticationService from "@/services/authenticationService.js";
 import authenticationUrls from "@/urls/authenticationUrls.js";
 import AppInputPassword from "@/components/common/AppInputPassword.vue";
+import { useRouter } from 'vue-router';
+import routeNames from "@/router/routeNames.js";
 
 export default {
   name: 'SignUpForm',
@@ -42,10 +44,11 @@ export default {
       email: '',
       password: '',
       confirmPassword: '',
+      router: useRouter()
     };
   },
   methods: {
-    async createQuote(event) {
+    async signUp(event) {
       event.preventDefault();
       try {
         const response = await authenticationService.post(authenticationUrls.signUp, {
@@ -55,6 +58,7 @@ export default {
         });
         console.log('Response data:', response.data);
         this.$emit('close');
+        this.router.push({ name: routeNames.DashboardView });
       } catch (error) {
         console.error('Error:', error);
       }

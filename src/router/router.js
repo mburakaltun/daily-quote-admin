@@ -1,18 +1,21 @@
-import {createRouter, createWebHistory} from 'vue-router'
-import DashboardView from "@/views/DashboardView.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import routeNames from "@/router/routeNames";
 import SignUpView from "@/views/SignUpView.vue";
+import DashboardView from "@/views/DashboardView.vue";
+import CreateQuoteView from "@/views/CreateQuoteView.vue";
+import AllQuotesView from "@/views/AllQuotesView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
-            name: 'Dashboard',
+            name: routeNames.DashboardView,
             component: DashboardView,
         },
         {
             path: '/signUp',
-            name: 'SignUp',
+            name: routeNames.SignUpView,
             component: SignUpView,
             meta: {
                 hideSidebar: true
@@ -20,15 +23,15 @@ const router = createRouter({
         },
         {
             path: '/createQuote',
-            name: 'CreateQuote',
-            component: () => import('@/views/CreateQuoteView.vue'),
+            name: routeNames.CreateQuoteView,
+            component: CreateQuoteView,
         },
         {
             path: '/allQuotes',
-            name: 'AllQuotes',
-            component: () => import('@/views/AllQuotesView.vue'),
+            name: routeNames.AllQuotesView,
+            component: AllQuotesView,
         }
     ],
-})
+});
 
-export default router
+export default router;
