@@ -1,6 +1,7 @@
 <template>
   <div class="relative">
-    <select
+    <input
+        :type="inputType"
         :id="id"
         :class="[
         'bg-input-background',
@@ -13,60 +14,48 @@
         'border-black',
         'border-b-2',
         'border-r-2',
-        'rounded-none',
         'focus:outline-none',
         'focus:border-input-focus-border',
-        'rounded-lg',
+        'focus:border-2',
         'focus:ring-0',
         'box-border',
-        'focus:shadow-outline'
+        'focus:shadow-outline',
+        'rounded-md'
       ]"
-        v-model="selected"
-    >
-      <option disabled value="">{{ defaultOption }}</option>
-      <option v-for="option in options" :key="option.value" :value="option.value">
-        {{ option.label }}
-      </option>
-    </select>
+        :placeholder="placeholder"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+    />
+    <span class="focus-border"></span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AppDropdown',
+  name: 'AppInputText',
   props: {
     id: {
       type: String,
       required: true,
     },
-    options: {
-      type: Array,
-      required: true,
+    placeholder: {
+      type: String,
+      default: 'Type something...',
     },
     modelValue: {
       type: String,
       default: '',
     },
-    defaultOption: {
+    inputType: {
       type: String,
-      default: 'Please select',
-    },
-  },
-  data() {
-    return {
-      selected: this.modelValue,
-    };
-  },
-  watch: {
-    selected(newValue) {
-      this.$emit('update:modelValue', newValue);
+      default: 'text',
     },
   },
 };
 </script>
 
 <style scoped>
-select {
+input {
   box-sizing: border-box;
 }
 
@@ -74,8 +63,12 @@ select {
   position: relative;
 }
 
-select:focus {
-  background-color: #fff3e0; /* Change background color on focus */
+input::placeholder {
+  color: #777777;
+  font-style: italic; /* Make placeholder text italic */
+}
+
+input:focus {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add box shadow on focus */
 }
 </style>

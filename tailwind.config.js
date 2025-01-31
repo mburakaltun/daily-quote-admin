@@ -13,6 +13,8 @@ export default {
         'input-background': '#ded5ca',
         'app-button-background' : '#207894',
         'app-button-hover-background' : '#175265',
+        'app-button-danger-background' : '#b22020',
+        'app-button-danger-hover-background' : '#942020',
         'app-li-hover-background' : '#175265',
         'input-focus-border': '#207894',
       },

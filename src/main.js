@@ -2,7 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/router.js'
 
 // Import FontAwesome core
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -14,6 +14,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 // Import the FontAwesomeIcon component
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import '@fortawesome/fontawesome-free/css/all.css';
 
 library.add(fas, far, fab)
 
