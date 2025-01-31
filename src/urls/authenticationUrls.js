@@ -1,5 +1,6 @@
 const authenticationUrls = {
-    signUp: "/signUp"
+    signUp: "/signUp",
+    signIn: "/signIn"
 };
 
 export default authenticationUrls;
