@@ -13,7 +13,6 @@
         'border-black',
         'border-b-2',
         'border-r-2',
-        'rounded-none',
         'focus:outline-none',
         'focus:ring-0',
         'focus:border-input-focus-border',
@@ -24,6 +23,8 @@
       ]"
         :rows="rows"
         :placeholder="placeholder"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
     ></textarea>
     <span class="focus-border"></span>
   </div>
@@ -36,6 +37,10 @@ export default {
     id: {
       type: String,
       required: true,
+    },
+    modelValue: {
+      type: String,
+      default: '',
     },
     rows: {
       type: Number,

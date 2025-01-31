@@ -1,7 +1,9 @@
+import pathNames from "@/router/pathNames.js";
+
 export const topSidebarItems = [
-    { to: '/', icon: 'tachometer-alt', text: 'Dashboard' },
-    { to: '/createQuote', icon: 'plus-circle', text: 'Create Quote' },
-    { to: '/allQuotes', icon: 'list', text: 'All Quotes' },
+    { to: pathNames.Dashboard, icon: 'tachometer-alt', text: 'Dashboard' },
+    { to: pathNames.CreateQuote, icon: 'plus-circle', text: 'Create Quote' },
+    { to: pathNames.AllQuotes, icon: 'list', text: 'All Quotes' },
     { to: '#', icon: 'chart-line', text: 'Analytics' },
     { to: '#', icon: 'users', text: 'Users' },
 ];

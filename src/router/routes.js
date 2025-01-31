@@ -4,10 +4,11 @@ import DashboardView from "@/views/DashboardView.vue";
 import CreateQuoteView from "@/views/CreateQuoteView.vue";
 import AllQuotesView from "@/views/AllQuotesView.vue";
 import SignInView from "@/views/authentication/SignInView.vue";
+import pathNames from "@/router/pathNames.js";
 
 const routes = [
     {
-        path: '/signUp',
+        path: pathNames.SignUp,
         component: SignUpView,
         name: routeNames.SignUpView,
         meta: {
@@ -15,7 +16,7 @@ const routes = [
         }
     },
     {
-        path: '/signIn',
+        path: pathNames.SignIn,
         component: SignInView,
         name: routeNames.SignInView,
         meta: {
@@ -23,17 +24,17 @@ const routes = [
         }
     },
     {
-        path: '/dashboard',
+        path: pathNames.Dashboard,
         component: DashboardView,
         name: routeNames.DashboardView,
     },
     {
-        path: '/createQuoteView',
+        path: pathNames.CreateQuote,
         component: CreateQuoteView,
         name: routeNames.CreateQuoteView,
     },
     {
-        path: '/allQuotes',
+        path: pathNames.AllQuotes,
         component: AllQuotesView,
         name: routeNames.AllQuotesView,
     }

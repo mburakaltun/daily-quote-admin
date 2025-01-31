@@ -38,7 +38,7 @@ import AppHeading from "@/components/common/AppHeading.vue";
 
 const quotes = ref([
   { id: 1, author: 'Author 1', text: 'Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a Lorem Iajshfasjn asjkdfasndsal ajk nasfas aa wfknasmlk a', type: 'West', category: 'Category 1', book: 'Book 1' },
-  { id: 2, author: 'Author 2', text: 'Quote 2', type: 'East', category: 'Category 2', book: 'Book 2' },
+  { id: 2, author: 'Author 2', text: 'This is a very long sentence that is intended to be more than two hundred characters long so that you can test the size of the textarea component in your Vue.js application. It includes various words and phrases to ensure that the length is sufficient for your testing purposes. By using this sentence, you can observe how the textarea handles large amounts of text and make any necessary adjustments to its styling or functionality.', type: 'East', category: 'Category 2', book: 'Book 2' },
 ]);
 </script>
 
