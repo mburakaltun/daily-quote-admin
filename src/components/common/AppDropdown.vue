@@ -13,7 +13,6 @@
         'border-black',
         'border-b-2',
         'border-r-2',
-        'rounded-none',
         'focus:outline-none',
         'focus:border-input-focus-border',
         'rounded-lg',

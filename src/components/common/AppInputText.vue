@@ -65,10 +65,10 @@ input {
 
 input::placeholder {
   color: #777777;
-  font-style: italic; /* Make placeholder text italic */
+  font-style: italic;
 }
 
 input:focus {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add box shadow on focus */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 </style>

@@ -1,5 +1,6 @@
 const quoteUrls = {
-    createQuote: "/createQuote"
+    createQuote: "/createQuote",
+    getAllQuotes: "/getAllQuotes",
 };
 
 export default quoteUrls;

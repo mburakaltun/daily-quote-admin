@@ -3,38 +3,75 @@
     <form @submit="createQuote" class="form-container">
       <AppHeading text="Create New Quote" size="h3"></AppHeading>
 
+      <!-- Quote & Turkish Quote -->
       <div class="grid grid-cols-2 gap-4 mb-6">
         <div>
           <AppLabel inputId="quote" text="Quote" size="medium"></AppLabel>
-          <AppTextarea id="quote" placeholder="Enter your quote here..." v-model="content"></AppTextarea>
+          <AppTextarea
+              id="quote"
+              placeholder="Enter your quote here..."
+              v-model="content"
+              :class="{ 'border-red-500': errors.content }"
+          />
+          <p v-if="errors.content" class="text-red-500 text-sm mt-1">Quote is required.</p>
         </div>
         <div>
           <AppLabel inputId="turkishQuote" text="Quote (Turkish)" size="medium"></AppLabel>
-          <AppTextarea id="turkishQuote" placeholder="Enter Turkish translation of the quote here..." v-model="contentTr"></AppTextarea>
+          <AppTextarea
+              id="turkishQuote"
+              placeholder="Enter Turkish translation..."
+              v-model="contentTr"
+              :class="{ 'border-red-500': errors.contentTr }"
+          />
+          <p v-if="errors.contentTr" class="text-red-500 text-sm mt-1">Turkish quote is required.</p>
         </div>
       </div>
 
+      <!-- Note & Tags -->
       <div class="grid grid-cols-2 gap-4 mb-6">
         <div>
           <AppLabel inputId="note" text="Note" size="medium"></AppLabel>
-          <AppTextarea id="note" placeholder="Enter your note here..." rows="2" v-model="note"></AppTextarea>
+          <AppTextarea
+              id="note"
+              placeholder="Enter your note here..."
+              rows="2"
+              v-model="note"
+          />
         </div>
-
         <div>
           <AppLabel inputId="tags" text="Tags" size="medium"></AppLabel>
-          <AppTextarea id="note" placeholder="Enter your tags here by comma seperated (tag1, tag2, ...)" rows="2" v-model="tagNameList"></AppTextarea>
+          <AppTextarea
+              id="tags"
+              placeholder="Enter tags (tag1, tag2, ...)"
+              rows="2"
+              v-model="tagNameList"
+          />
+          <p v-if="errors.tagNameList" class="text-red-500 text-sm mt-1">Tags are required.</p>
         </div>
       </div>
 
+      <!-- Author, Book, Quote Type, Category -->
       <div class="grid grid-cols-4 gap-4 mb-6">
         <div>
           <AppLabel inputId="author-input" text="Author" size="medium"></AppLabel>
-          <AppInputText id="author-input" placeholder="Enter author name..." v-model="authorName"></AppInputText>
+          <AppInputText
+              id="author-input"
+              placeholder="Enter author name..."
+              v-model="authorName"
+              :class="{ 'border-red-500': errors.authorName }"
+          />
+          <p v-if="errors.authorName" class="text-red-500 text-sm mt-1">Author name is required.</p>
         </div>
 
         <div>
-          <AppLabel input-id="book-input" text="Book Name" size="medium"></AppLabel>
-          <AppInputText id="book-input" placeholder="Enter book name..." v-model="bookName"></AppInputText>
+          <AppLabel input-id="book-input" text="Book Title" size="medium"></AppLabel>
+          <AppInputText
+              id="book-input"
+              placeholder="Enter book title..."
+              v-model="bookTitle"
+              :class="{ 'border-red-500': errors.bookTitle }"
+          />
+          <p v-if="errors.bookTitle" class="text-red-500 text-sm mt-1">Book title is required.</p>
         </div>
 
         <div>
@@ -42,17 +79,25 @@
           <AppDropdown
               id="quoteType"
               :options="[
-                { label: 'West', value: 'west' },
-                { label: 'East', value: 'east' },
-                { label: 'Unknown', value: 'unknown' },
-              ]"
+              { label: 'West', value: 'west' },
+              { label: 'East', value: 'east' },
+              { label: 'Unknown', value: 'unknown' },
+            ]"
               v-model="quoteTypeName"
+              :class="{ 'border-red-500': errors.quoteTypeName }"
           />
+          <p v-if="errors.quoteTypeName" class="text-red-500 text-sm mt-1">Quote type is required.</p>
         </div>
 
         <div>
           <AppLabel input-id="category-input" text="Category" size="medium"></AppLabel>
-          <AppInputText id="category-input" placeholder="Enter category..." v-model="quoteCategoryName"></AppInputText>
+          <AppInputText
+              id="category-input"
+              placeholder="Enter category..."
+              v-model="quoteCategoryName"
+              :class="{ 'border-red-500': errors.quoteCategoryName }"
+          />
+          <p v-if="errors.quoteCategoryName" class="text-red-500 text-sm mt-1">Category is required.</p>
         </div>
       </div>
 
@@ -70,16 +115,11 @@ import AppHeading from "@/components/common/AppHeading.vue";
 import AppDropdown from "@/components/common/AppDropdown.vue";
 import quoteService from "@/services/quoteService";
 import quoteUrls from "@/urls/quoteUrls";
-import AppInputDropdown from "@/components/common/AppInputDropdown.vue";
-import authenticationService from "@/services/authenticationService.js";
-import authenticationUrls from "@/urls/authenticationUrls.js";
-import appConstants from "@/constants/appConstants.js";
-import routeNames from "@/router/routeNames.js";
+import { useToast } from "vue-toastification";
 
 export default {
   name: 'CreateQuoteForm',
   components: {
-    AppInputDropdown,
     AppLabel,
     AppInputText,
     AppButton,
@@ -93,38 +133,58 @@ export default {
       contentTr: '',
       authorName: '',
       quoteCategoryName: '',
-      bookName: '',
+      bookTitle: '',
       quoteTypeName: '',
       note: '',
       tagNameList: '',
+      errors: {}
     };
   },
+  setup() {
+    return { toast: useToast() };
+  },
   methods: {
+    validateForm() {
+      this.errors = {};
+
+      if (!this.content.trim()) this.errors.content = true;
+      if (!this.contentTr.trim()) this.errors.contentTr = true;
+      if (!this.authorName.trim()) this.errors.authorName = true;
+      if (!this.bookTitle.trim()) this.errors.bookTitle = true;
+      if (!this.quoteTypeName) this.errors.quoteTypeName = true;
+      if (!this.quoteCategoryName.trim()) this.errors.quoteCategoryName = true;
+
+      console.log('Errors:', this.errors);
+      return Object.keys(this.errors).length === 0;
+    },
     async createQuote(event) {
       event.preventDefault();
+
+      if (!this.validateForm()) return;
 
       const requestBody = {
         content: this.content,
         contentTr: this.contentTr,
         note: this.note,
         tagNameList: this.tagNameList,
-
         authorName: this.authorName,
-        bookName: this.bookName,
+        bookTitle: this.bookTitle,
         quoteCategoryName: this.quoteCategoryName,
         quoteTypeName: this.quoteTypeName,
       };
-      await quoteService.post(quoteUrls.createQuote, requestBody).then((response) => {
-        console.log('Response data:', response);
-      }).catch((error) => {
+
+      try {
+        const response = await quoteService.post(quoteUrls.createQuote, requestBody);
+        console.log('Response:', response);
+        this.toast.success('Quote created successfully.');
+      } catch (error) {
         console.log(error);
-        throw error;
-      })
+        this.toast.error('Error creating quote.');
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-
 </style>
