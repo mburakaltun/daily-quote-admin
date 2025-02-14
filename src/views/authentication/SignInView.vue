@@ -9,12 +9,11 @@
 </template>
 
 <script>
-import AppButton from "@/components/common/AppButton.vue";
 import SignInForm from "@/components/authentication/SignInForm.vue";
 
 export default {
-  name: 'SignUpView',
-  components: {SignInForm, AppButton },
+  name: 'SignInView',
+  components: {SignInForm},
   data() {
     return {
       showModal: true,

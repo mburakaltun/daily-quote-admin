@@ -177,10 +177,23 @@ export default {
         const response = await quoteService.post(quoteUrls.createQuote, requestBody);
         console.log('Response:', response);
         this.toast.success('Quote created successfully.');
+        this.$emit('quote-created');
+        this.resetForm();
       } catch (error) {
         console.log(error);
-        this.toast.error('Error creating quote.');
+        this.toast.error('Failed to create quote.');
       }
+    },
+    resetForm() {
+      this.content = '';
+      this.contentTr = '';
+      this.authorName = '';
+      this.quoteCategoryName = '';
+      this.bookTitle = '';
+      this.quoteTypeName = '';
+      this.note = '';
+      this.tagNameList = '';
+      this.errors = {};
     },
   },
 };

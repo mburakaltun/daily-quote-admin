@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import AppLabel from "@/components/common/AppLabel.vue";
 import AppInputText from "@/components/common/AppInputText.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
@@ -33,9 +32,8 @@ import routeNames from "@/router/routeNames.js";
 export default {
   name: 'SignUpForm',
   components: {
-    AppInputPassword,
-    AppLabel,
     AppInputText,
+    AppInputPassword,
     AppButton,
     AppHeading,
   },

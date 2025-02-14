@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
-    <CreateQuoteForm> </CreateQuoteForm>
-    <QuoteList> </QuoteList>
+    <CreateQuoteForm @quote-created="refreshQuotes"></CreateQuoteForm>
+    <QuoteList ref="quoteList"></QuoteList>
   </div>
 </template>
 
@@ -10,8 +10,13 @@ import CreateQuoteForm from "@/components/quote/CreateQuoteForm.vue";
 import QuoteList from "@/components/quote/QuoteList.vue";
 
 export default {
-  name: 'Dashboard',
+  name: 'AdminDashboard',
   components: {QuoteList, CreateQuoteForm},
+  methods: {
+    refreshQuotes() {
+      this.$refs.quoteList.fetchQuotes();
+    }
+  }
 };
 </script>
 

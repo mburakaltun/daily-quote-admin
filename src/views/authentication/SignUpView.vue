@@ -10,11 +10,10 @@
 
 <script>
 import SignUpForm from "@/components/authentication/SignUpForm.vue";
-import AppButton from "@/components/common/AppButton.vue";
 
 export default {
   name: 'SignUpView',
-  components: {AppButton, SignUpForm },
+  components: {SignUpForm },
   data() {
     return {
       showModal: true,

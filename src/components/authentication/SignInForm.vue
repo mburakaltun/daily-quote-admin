@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import AppLabel from "@/components/common/AppLabel.vue";
 import AppInputText from "@/components/common/AppInputText.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
@@ -32,9 +31,8 @@ import appConstants from "@/constants/appConstants.js";
 export default {
   name: 'SignInForm',
   components: {
-    AppInputPassword,
-    AppLabel,
     AppInputText,
+    AppInputPassword,
     AppButton,
     AppHeading,
   },
@@ -48,20 +46,21 @@ export default {
   methods: {
     async signUp(event) {
       event.preventDefault();
-      const requestBody = {
-        email: this.email,
-        password: this.password
-      };
-      await authenticationService.post(authenticationUrls.signIn, requestBody).then((response) => {
+      try {
+        const requestBody = {
+          email: this.email,
+          password: this.password
+        };
+        const response = await authenticationService.post(authenticationUrls.signIn, requestBody);
         console.log('Response data:', response);
         if (response.data.data.authenticationToken) {
           localStorage.setItem(appConstants.storageKeys.authenticationToken, response.data.data.authenticationToken);
           this.router.push({name: routeNames.DashboardView});
         }
-      }).catch((error) => {
-        console.log(error);
-        throw error;
-      })
+      } catch (error) {
+        console.error('Sign in error:', error);
+        // Add error handling here, maybe show a toast notification
+      }
     },
   },
 };

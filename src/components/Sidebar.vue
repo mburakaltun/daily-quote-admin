@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'Sidebar',
+  name: 'SidebarNav',
   props: {
     topItems: {
       type: Array,

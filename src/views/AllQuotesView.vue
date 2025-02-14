@@ -8,7 +8,7 @@
 import QuoteList from "@/components/quote/QuoteList.vue";
 
 export default {
-  name: 'All Quotes',
+  name: 'AllQuotesView',
   components: {QuoteList},
 };
 </script>

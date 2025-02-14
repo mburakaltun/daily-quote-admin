@@ -1,6 +1,4 @@
-const authenticationUrls = {
-    signUp: "/signUp",
-    signIn: "/signIn"
+export default {
+  signIn: '/authentication/signIn',
+  signUp: '/authentication/signUp'
 };
-
-export default authenticationUrls;

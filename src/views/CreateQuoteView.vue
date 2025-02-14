@@ -8,7 +8,7 @@
 import CreateQuoteForm from "@/components/quote/CreateQuoteForm.vue";
 
 export default {
-  name: 'Dashboard',
+  name: 'CreateQuoteView',
   components: {CreateQuoteForm},
 };
 </script>
