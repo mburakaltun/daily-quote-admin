@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-screen">
     <Sidebar
-        v-if="!$route.meta.hideSidebar"
+        v-if="!route.meta.hideSidebar"
         :top-items="topSidebarItems"
         :bottom-items="bottomSidebarItems"
         class="flex-[1]" />
@@ -14,19 +14,20 @@
 <script>
 import Sidebar from './components/Sidebar.vue';
 import { topSidebarItems, bottomSidebarItems } from './config/sidebarItems';
-import {useRouter} from "vue-router";
+import { useRoute } from 'vue-router';
 
 export default {
   name: 'App',
   components: {
     Sidebar,
   },
-  data() {
+  setup() {
+    const route = useRoute();
+
     return {
+      route,
       topSidebarItems,
       bottomSidebarItems,
-      drawer: false,
-      router: useRouter(),
     };
   },
 };
