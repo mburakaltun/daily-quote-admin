@@ -44,9 +44,9 @@
               id="tags"
               placeholder="Enter tags (tag1, tag2, ...)"
               rows="2"
-              v-model="tagNameList"
+              v-model="tagList"
           />
-          <p v-if="errors.tagNameList" class="text-red-500 text-sm mt-1">Tags are required.</p>
+          <p v-if="errors.tagList" class="text-red-500 text-sm mt-1">Tags are required.</p>
         </div>
       </div>
 
@@ -68,9 +68,9 @@
           <AppDropdown
               id="quoteType"
               :options="[
-        { label: 'West', value: 'west' },
-        { label: 'East', value: 'east' },
-        { label: 'Unknown', value: 'unknown' },
+        { label: 'West', value: 'West' },
+        { label: 'East', value: 'East' },
+        { label: 'Unknown', value: 'Unknown' },
       ]"
               v-model="quoteTypeName"
               :class="{ 'border-red-500': errors.quoteTypeName }"
@@ -116,17 +116,17 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
           <AppToggle
-              v-model="isPublic"
+              v-model="isActive"
               class="relative inline-flex h-6 w-11 items-center rounded-full"
-              :class="isPublic ? 'bg-app-toggle-background' : 'bg-gray-400'"
+              :class="isActive ? 'bg-app-toggle-background' : 'bg-gray-400'"
           >
             <span class="sr-only">Toggle status</span>
             <span
                 class="inline-block h-4 w-4 transform rounded-full bg-white transition"
-                :class="isPublic ? 'translate-x-6' : 'translate-x-1'"
+                :class="isActive ? 'translate-x-6' : 'translate-x-1'"
             ></span>
           </AppToggle>
-          <span class="text-sm text-app-text">{{ isPublic ? 'Public' : 'Private' }}</span>
+          <span class="text-sm text-app-text">{{ isActive ? 'Public' : 'Private' }}</span>
         </div>
         <div class="flex gap-2">
           <AppButton
@@ -172,10 +172,10 @@ export default {
       quoteCategoryName: '',
       quoteTypeName: '',
       note: '',
-      tagNameList: '',
+      tagList: '',
       bookTitle: '',
       source: '',
-      isPublic: true,
+      isActive: true,
       errors: {}
     };
   },
@@ -204,13 +204,13 @@ export default {
         content: this.content,
         contentTr: this.contentTr,
         note: this.note,
-        tagNameList: this.tagNameList,
+        tagList: this.tagList,
         authorName: this.authorName,
         bookTitle: this.bookTitle,
         quoteCategoryName: this.quoteCategoryName,
         quoteTypeName: this.quoteTypeName,
-        quoteSource: this.source,
-        status: this.isPublic ? 1 : 0,
+        source: this.source,
+        active: this.isActive,
       };
 
       try {
@@ -232,9 +232,9 @@ export default {
       this.bookTitle = '';
       this.quoteTypeName = '';
       this.note = '';
-      this.tagNameList = '';
+      this.tagList = '';
       this.source = '';
-      this.isPublic = true;
+      this.isActive = true;
       this.errors = {};
     },
   },
