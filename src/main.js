@@ -29,7 +29,7 @@ const options = {
     position: "top-right",
     timeout: 3000,
     closeOnClick: true,
-    pauseOnHover: true,
+    pauseOnHover: false,
     draggable: true,
     transition: "Vue-Toastification__fade",
 };

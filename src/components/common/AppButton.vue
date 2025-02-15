@@ -8,6 +8,7 @@
       sizeClasses,
       bgColorClasses,
     ]"
+      @click="handleClick"
   >
     {{ text }}
   </button>
@@ -33,8 +34,12 @@ export default {
     },
     bgColor: {
       type: String,
-      default: 'bg-app-button-background', // Default color class
+      default: 'bg-app-button-background',
     },
+    onClick: {
+      type: Function,
+      default: () => {}
+    }
   },
   computed: {
     sizeClasses() {
@@ -54,5 +59,10 @@ export default {
       return `${this.bgColor} hover:bg-app-button-hover-background`;
     },
   },
+  methods: {
+    handleClick(event) {
+      this.onClick(event);
+    }
+  }
 };
 </script>

@@ -14,17 +14,22 @@
       <tr v-for="quote in quotes" :key="quote.id" class="transition-all border-b-2 border-black">
         <td class="p-2 text-app-text text-center">{{ quote.id }}</td>
         <td class="p-2 text-app-text text-center">{{ quote.content }}</td>
-        <td class="p-2 text-app-text text-center">{{ quote.author }}</td>
+        <td class="p-2 text-app-text text-center">{{ quote.authorName }}</td>
         <td class="p-2 text-app-text text-center">
           <div class="flex justify-center space-x-2">
-            <AppButton text="Edit" size="small"></AppButton>
-            <AppButton text="Delete" size="small"></AppButton>
+            <AppButton text="Edit" size="small" @click="openEditModal(quote)"></AppButton>
+            <AppButton type="danger" text="Delete" size="small"></AppButton>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
+  <UpdateQuoteFormModal
+      v-model="showEditModal"
+      :quote="selectedQuote"
+      @quote-updated="fetchQuotes"
+  />
 </template>
 
 <script>
@@ -32,9 +37,11 @@ import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
 import quoteService from '@/services/quoteService.js';
 import quoteUrls from "@/urls/quoteUrls.js";
+import UpdateQuoteFormModal from "@/components/quote/UpdateQuoteFormModal.vue";
 
 export default {
   components: {
+    UpdateQuoteFormModal,
     AppButton,
     AppHeading,
   },
@@ -42,6 +49,8 @@ export default {
   data() {
     return {
       quotes: [],
+      showEditModal: false,
+      selectedQuote: null,
     };
   },
   created() {
@@ -52,6 +61,11 @@ export default {
       const response = await quoteService.get(quoteUrls.getAllQuotes);
       console.log(response);
       this.quotes = response.data.data.quoteDTOList;
+    },
+    openEditModal(quote) {
+      console.log("quote", quote);
+      this.selectedQuote = quote;
+      this.showEditModal = true;
     },
   },
 };
