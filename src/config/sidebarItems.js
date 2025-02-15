@@ -10,5 +10,5 @@ export const topSidebarItems = [
 
 export const bottomSidebarItems = [
     { to: '#', icon: 'cog', text: 'Settings' },
-    { to: '#', icon: 'sign-out-alt', text: 'Logout' },
+    { to: pathNames.SignIn, icon: 'sign-out-alt', text: 'Logout' },
 ];
