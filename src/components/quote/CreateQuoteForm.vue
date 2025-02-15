@@ -50,8 +50,8 @@
         </div>
       </div>
 
-      <!-- Author, Book, Quote Type, Category -->
-      <div class="grid grid-cols-4 gap-4 mb-6">
+      <!-- Author, Quote Type, Category -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
         <div>
           <AppLabel inputId="author-input" text="Author" size="medium"></AppLabel>
           <AppInputText
@@ -64,25 +64,14 @@
         </div>
 
         <div>
-          <AppLabel input-id="book-input" text="Book Title" size="medium"></AppLabel>
-          <AppInputText
-              id="book-input"
-              placeholder="Enter book title..."
-              v-model="bookTitle"
-              :class="{ 'border-red-500': errors.bookTitle }"
-          />
-          <p v-if="errors.bookTitle" class="text-red-500 text-sm mt-1">Book title is required.</p>
-        </div>
-
-        <div>
           <AppLabel text="Quote Type" size="medium" input-id="quoteType"></AppLabel>
           <AppDropdown
               id="quoteType"
               :options="[
-              { label: 'West', value: 'west' },
-              { label: 'East', value: 'east' },
-              { label: 'Unknown', value: 'unknown' },
-            ]"
+        { label: 'West', value: 'west' },
+        { label: 'East', value: 'east' },
+        { label: 'Unknown', value: 'unknown' },
+      ]"
               v-model="quoteTypeName"
               :class="{ 'border-red-500': errors.quoteTypeName }"
           />
@@ -101,7 +90,53 @@
         </div>
       </div>
 
-      <AppButton type="submit" text="Save"></AppButton>
+      <!-- Book and Source -->
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div>
+          <AppLabel input-id="book-input" text="Book Title" size="medium"></AppLabel>
+          <AppInputText
+              id="book-input"
+              placeholder="Enter book title..."
+              v-model="bookTitle"
+              :class="{ 'border-red-500': errors.bookTitle }"
+          />
+        </div>
+
+        <div class="col-span-3">
+          <AppLabel input-id="source-input" text="Source" size="medium"></AppLabel>
+          <AppInputText
+              id="source-input"
+              placeholder="Enter source..."
+              v-model="source"
+              :class="{ 'border-red-500': errors.source }"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <AppToggle
+              v-model="isPublic"
+              class="relative inline-flex h-6 w-11 items-center rounded-full"
+              :class="isPublic ? 'bg-app-toggle-background' : 'bg-gray-400'"
+          >
+            <span class="sr-only">Toggle status</span>
+            <span
+                class="inline-block h-4 w-4 transform rounded-full bg-white transition"
+                :class="isPublic ? 'translate-x-6' : 'translate-x-1'"
+            ></span>
+          </AppToggle>
+          <span class="text-sm text-app-text">{{ isPublic ? 'Public' : 'Private' }}</span>
+        </div>
+        <div class="flex gap-2">
+          <AppButton
+              type="danger"
+              text="Reset"
+              @click="resetForm"
+          ></AppButton>
+          <AppButton type="submit" text="Save"></AppButton>
+        </div>
+      </div>
     </form>
   </div>
 </template>
@@ -115,7 +150,8 @@ import AppHeading from "@/components/common/AppHeading.vue";
 import AppDropdown from "@/components/common/AppDropdown.vue";
 import quoteService from "@/services/quoteService";
 import quoteUrls from "@/urls/quoteUrls";
-import { useToast } from "vue-toastification";
+import {useToast} from "vue-toastification";
+import AppToggle from "@/components/common/AppToggle.vue";
 
 export default {
   name: 'CreateQuoteForm',
@@ -126,6 +162,7 @@ export default {
     AppTextarea,
     AppHeading,
     AppDropdown,
+    AppToggle,
   },
   data() {
     return {
@@ -133,15 +170,17 @@ export default {
       contentTr: '',
       authorName: '',
       quoteCategoryName: '',
-      bookTitle: '',
       quoteTypeName: '',
       note: '',
       tagNameList: '',
+      bookTitle: '',
+      source: '',
+      isPublic: true,
       errors: {}
     };
   },
   setup() {
-    return { toast: useToast() };
+    return {toast: useToast()};
   },
   methods: {
     validateForm() {
@@ -150,7 +189,6 @@ export default {
       if (!this.content.trim()) this.errors.content = true;
       if (!this.contentTr.trim()) this.errors.contentTr = true;
       if (!this.authorName.trim()) this.errors.authorName = true;
-      if (!this.bookTitle.trim()) this.errors.bookTitle = true;
       if (!this.quoteTypeName) this.errors.quoteTypeName = true;
       if (!this.quoteCategoryName.trim()) this.errors.quoteCategoryName = true;
 
@@ -171,6 +209,8 @@ export default {
         bookTitle: this.bookTitle,
         quoteCategoryName: this.quoteCategoryName,
         quoteTypeName: this.quoteTypeName,
+        quoteSource: this.source,
+        status: this.isPublic ? 1 : 0,
       };
 
       try {
@@ -193,6 +233,8 @@ export default {
       this.quoteTypeName = '';
       this.note = '';
       this.tagNameList = '';
+      this.source = '';
+      this.isPublic = true;
       this.errors = {};
     },
   },

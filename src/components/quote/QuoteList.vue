@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     async fetchQuotes() {
-      const response = await quoteService.get(quoteUrls.getAllQuotes);
+      const response = await quoteService.get(quoteUrls.getAllQuotesForAdmin);
       console.log(response);
       this.quotes = response.data.data.quoteDTOList;
     },
