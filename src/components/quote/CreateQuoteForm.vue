@@ -116,17 +116,17 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
           <AppToggle
-              v-model="isActive"
+              v-model="active"
               class="relative inline-flex h-6 w-11 items-center rounded-full"
-              :class="isActive ? 'bg-app-toggle-background' : 'bg-gray-400'"
+              :class="active ? 'bg-app-toggle-background' : 'bg-gray-400'"
           >
             <span class="sr-only">Toggle status</span>
             <span
                 class="inline-block h-4 w-4 transform rounded-full bg-white transition"
-                :class="isActive ? 'translate-x-6' : 'translate-x-1'"
+                :class="active ? 'translate-x-6' : 'translate-x-1'"
             ></span>
           </AppToggle>
-          <span class="text-sm text-app-text">{{ isActive ? 'Public' : 'Private' }}</span>
+          <span class="text-sm text-app-text">{{ active ? 'Public' : 'Private' }}</span>
         </div>
         <div class="flex gap-2">
           <AppButton
@@ -175,7 +175,7 @@ export default {
       tagList: '',
       bookTitle: '',
       source: '',
-      isActive: true,
+      active: true,
       errors: {}
     };
   },
@@ -210,7 +210,7 @@ export default {
         quoteCategoryName: this.quoteCategoryName,
         quoteTypeName: this.quoteTypeName,
         source: this.source,
-        active: this.isActive,
+        active: this.active,
       };
 
       try {
@@ -234,7 +234,7 @@ export default {
       this.note = '';
       this.tagList = '';
       this.source = '';
-      this.isActive = true;
+      this.active = true;
       this.errors = {};
     },
   },
