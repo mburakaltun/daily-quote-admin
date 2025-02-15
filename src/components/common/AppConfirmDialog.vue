@@ -12,7 +12,8 @@
         />
         <AppButton
             text="Delete"
-            type="danger"
+            type="button"
+            category="danger"
             size="small"
             @click="confirm"
         />

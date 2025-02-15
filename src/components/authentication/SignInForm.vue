@@ -12,7 +12,7 @@
       </div>
 
       <AppButton type="submit" text="Sign In" class="w-full mt-4"></AppButton>
-      <AppButton @click="$emit('close')" text="Close" type="danger" class="w-full mt-4"></AppButton>
+      <AppButton @click="$emit('close')" text="Close" type="button" category="danger" class="w-full mt-4"></AppButton>
     </form>
   </div>
 </template>

@@ -130,7 +130,8 @@
         </div>
         <div class="flex gap-2">
           <AppButton
-              type="danger"
+              type="reset"
+              category="danger"
               text="Reset"
               @click="resetForm"
           ></AppButton>

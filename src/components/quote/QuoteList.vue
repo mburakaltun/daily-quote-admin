@@ -18,7 +18,7 @@
         <td class="p-2 text-app-text text-center">
           <div class="flex justify-center space-x-2">
             <AppButton text="Edit" size="small" @click="openEditModal(quote)"></AppButton>
-            <AppButton type="danger" text="Delete" size="small" @click="confirmDelete(quote)"></AppButton>
+            <AppButton category="danger" text="Delete" size="small" @click="confirmDelete(quote)"></AppButton>
           </div>
         </td>
       </tr>
