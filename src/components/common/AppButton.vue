@@ -30,7 +30,12 @@ export default {
     type: {
       type: String,
       default: 'button',
-      validator: value => ['button', 'submit', 'reset', 'danger'].includes(value),
+      validator: value => ['button', 'submit', 'reset'].includes(value),
+    },
+    category: {
+      type: String,
+      default: 'primary',
+      validator: value => ['primary', 'secondary', 'danger'].includes(value),
     },
     bgColor: {
       type: String,
@@ -53,7 +58,7 @@ export default {
       }
     },
     bgColorClasses() {
-      if (this.type === 'danger') {
+      if (this.category === 'danger') {
         return 'bg-app-button-danger-background hover:bg-app-button-danger-hover-background';
       }
       return `${this.bgColor} hover:bg-app-button-hover-background`;

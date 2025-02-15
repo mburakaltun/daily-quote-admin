@@ -132,7 +132,7 @@
 
     <template #footer>
       <div class="flex justify-end gap-2">
-        <AppButton type="danger" text="Cancel" @click="closeModal"></AppButton>
+        <AppButton category="danger" text="Cancel" @click="closeModal"></AppButton>
         <AppButton text="Update" @click="updateQuote"></AppButton>
       </div>
     </template>

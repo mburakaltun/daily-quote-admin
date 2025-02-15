@@ -18,12 +18,18 @@
         <td class="p-2 text-app-text text-center">
           <div class="flex justify-center space-x-2">
             <AppButton text="Edit" size="small" @click="openEditModal(quote)"></AppButton>
-            <AppButton type="danger" text="Delete" size="small"></AppButton>
+            <AppButton category="danger" text="Delete" size="small" @click="confirmDelete(quote)"></AppButton>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
+    <ConfirmDialog
+        v-model="showDeleteConfirm"
+        title="Delete Quote"
+        message="Are you sure you want to delete this quote?"
+        @confirm="deleteQuote"
+    />
   </div>
   <UpdateQuoteFormModal
       v-model="showEditModal"
@@ -38,9 +44,12 @@ import AppHeading from "@/components/common/AppHeading.vue";
 import quoteService from '@/services/quoteService.js';
 import quoteUrls from "@/urls/quoteUrls.js";
 import UpdateQuoteFormModal from "@/components/quote/UpdateQuoteFormModal.vue";
+import ConfirmDialog from "@/components/common/AppConfirmDialog.vue";
+import {useToast} from "vue-toastification";
 
 export default {
   components: {
+    ConfirmDialog,
     UpdateQuoteFormModal,
     AppButton,
     AppHeading,
@@ -48,7 +57,10 @@ export default {
 
   data() {
     return {
+      toast: useToast(),
       quotes: [],
+      showDeleteConfirm: false,
+      quoteToDelete: null,
       showEditModal: false,
       selectedQuote: null,
     };
@@ -66,6 +78,20 @@ export default {
       console.log("quote", quote);
       this.selectedQuote = quote;
       this.showEditModal = true;
+    },
+    confirmDelete(quote) {
+      this.quoteToDelete = quote;
+      this.showDeleteConfirm = true;
+    },
+    async deleteQuote() {
+      try {
+        await quoteService.delete(`${quoteUrls.deleteQuote}/${this.quoteToDelete.id}`);
+        this.toast.success('Quote deleted successfully');
+        await this.fetchQuotes();
+      } catch (error) {
+        this.toast.error('Failed to delete quote');
+      }
+      this.quoteToDelete = null;
     },
   },
 };
