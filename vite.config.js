@@ -15,7 +15,10 @@ export default defineConfig({
   preview: {
     port: process.env.PORT || 3000,
     host: true,
-    allowedHosts: ['healthcheck.railway.app']
+    allowedHosts: [
+      'healthcheck.railway.app',
+      'daily-quote-admin-production.up.railway.app'
+    ]
   },
   resolve: {
     alias: {
