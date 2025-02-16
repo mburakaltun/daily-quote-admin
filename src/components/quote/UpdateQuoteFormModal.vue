@@ -133,7 +133,13 @@
     <template #footer>
       <div class="flex justify-end gap-2">
         <AppButton category="danger" text="Cancel" @click="closeModal"></AppButton>
-        <AppButton text="Update" @click="updateQuote"></AppButton>
+        <AppButton
+            :text="isLoading ? 'Updating...' : 'Update'"
+            @click="updateQuote"
+            :disabled="isLoading"
+        >
+          <font-awesome-icon v-if="isLoading" icon="spinner" spin class="mr-2" />
+        </AppButton>
       </div>
     </template>
   </AppModal>
@@ -186,7 +192,8 @@ export default {
         source: '',
         active: true,
       },
-      errors: {}
+      errors: {},
+      isLoading: false
     };
   },
   setup() {
@@ -237,6 +244,8 @@ export default {
     async updateQuote() {
       if (!this.validateForm()) return;
 
+      this.isLoading = true;
+
       const requestBody = {
         id: this.quote.id,
         content: this.formData.content,
@@ -259,6 +268,8 @@ export default {
       } catch (error) {
         console.error(error);
         this.toast.error('Failed to update quote');
+      } finally {
+        this.isLoading = false;
       }
     },
     closeModal() {

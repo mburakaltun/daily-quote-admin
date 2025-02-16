@@ -1,8 +1,8 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import routes from "@/router/routes.js";
 
 const router = createRouter({
-    history: createWebHashHistory('/daily-quote-admin/'),
+    history: createWebHistory(),
     routes
 });
 

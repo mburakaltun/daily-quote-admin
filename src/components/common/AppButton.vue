@@ -1,15 +1,19 @@
 <template>
   <button
       :type="type"
+      :disabled="disabled"
       :class="[
-      'text-white',
-      'border-white',
-      'focus:outline-none',
-      sizeClasses,
-      bgColorClasses,
-    ]"
+        'text-white',
+        'border-white',
+        'focus:outline-none',
+        'flex items-center justify-center',
+        disabled ? 'opacity-50 cursor-not-allowed' : '',
+        sizeClasses,
+        bgColorClasses,
+      ]"
       @click="handleClick"
   >
+    <slot></slot>
     {{ text }}
   </button>
 </template>
@@ -44,6 +48,10 @@ export default {
     onClick: {
       type: Function,
       default: () => {}
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -66,7 +74,9 @@ export default {
   },
   methods: {
     handleClick(event) {
-      this.onClick(event);
+      if (!this.disabled) {
+        this.onClick(event);
+      }
     }
   }
 };

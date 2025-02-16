@@ -1,8 +1,8 @@
 <template>
   <div class="create-quote-view">
-    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-container-background p-6 rounded-lg shadow-md w-full max-w-xl">
-        <SignInForm @close="showModal = false"></SignInForm>
+        <SignInForm></SignInForm>
       </div>
     </div>
   </div>
@@ -16,7 +16,6 @@ export default {
   components: {SignInForm},
   data() {
     return {
-      showModal: true,
     };
   },
 };

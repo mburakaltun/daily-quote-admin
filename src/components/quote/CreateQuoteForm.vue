@@ -135,7 +135,11 @@
               text="Reset"
               @click="resetForm"
           ></AppButton>
-          <AppButton type="submit" text="Save"></AppButton>
+          <AppButton type="submit"
+                     :text="isLoading ? 'Saving...' : 'Save'"
+                     :disabled="isLoading">
+            <font-awesome-icon v-if="isLoading" icon="spinner" spin class="mr-2"/>
+          </AppButton>
         </div>
       </div>
     </form>
@@ -177,7 +181,8 @@ export default {
       bookTitle: '',
       source: '',
       active: true,
-      errors: {}
+      errors: {},
+      isLoading: false
     };
   },
   setup() {
@@ -201,6 +206,8 @@ export default {
 
       if (!this.validateForm()) return;
 
+      this.isLoading = true;
+
       const requestBody = {
         content: this.content,
         contentTr: this.contentTr,
@@ -223,6 +230,8 @@ export default {
       } catch (error) {
         console.log(error);
         this.toast.error('Failed to create quote.');
+      } finally {
+        this.isLoading = false;
       }
     },
     resetForm() {
