@@ -1,7 +1,10 @@
 <template>
   <div class="quote-list-container mb-8 border-2 border-black p-4 bg-container-background rounded-lg">
     <AppHeading text="Quote List" size="h3"></AppHeading>
-    <table class="w-full border-collapse">
+    <div v-if="isLoading" class="flex justify-center items-center p-8">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-app-text"></div>
+    </div>
+    <table v-else class="w-full border-collapse">
       <thead>
       <tr class="text-black border-b-2 border-black">
         <th class="p-2 font-bold text-app-text" style="width: 10%;">ID</th>
@@ -63,6 +66,7 @@ export default {
       quoteToDelete: null,
       showEditModal: false,
       selectedQuote: null,
+      isLoading: false,
     };
   },
   created() {
@@ -70,9 +74,15 @@ export default {
   },
   methods: {
     async fetchQuotes() {
-      const response = await quoteService.get(quoteUrls.getAllQuotes);
-      console.log(response);
-      this.quotes = response.data.data.quoteDTOList;
+      try {
+        this.isLoading = true;
+        const response = await quoteService.get(quoteUrls.getAllQuotes);
+        this.quotes = response.data.data.quoteDTOList;
+      } catch (error) {
+        this.toast.error('Failed to fetch quotes');
+      } finally {
+        this.isLoading = false;
+      }
     },
     openEditModal(quote) {
       console.log("quote", quote);
