@@ -8,16 +8,25 @@
       </router-link>
     </ul>
     <ul class="sidebar-nav mb-4">
-      <router-link v-for="item in bottomItems" :key="item.text" :to="item.to" class="block mb-0.5 hover:bg-app-li-hover-background hover:rounded-lg transition-all p-3 text-base text-app-text">
-        <li class="flex items-center">
-          <font-awesome-icon :icon="item.icon" class="mr-2" /> {{ item.text }}
-        </li>
-      </router-link>
+      <template v-for="item in bottomItems" :key="item.text">
+        <router-link v-if="item.text !== 'Logout'" :to="item.to" class="block mb-0.5 hover:bg-app-li-hover-background hover:rounded-lg transition-all p-3 text-base text-app-text">
+          <li class="flex items-center">
+            <font-awesome-icon :icon="item.icon" class="mr-2" /> {{ item.text }}
+          </li>
+        </router-link>
+        <button v-else @click="handleLogout" class="w-full text-left block mb-0.5 hover:bg-app-li-hover-background hover:rounded-lg transition-all p-3 text-base text-app-text">
+          <li class="flex items-center">
+            <font-awesome-icon :icon="item.icon" class="mr-2" /> {{ item.text }}
+          </li>
+        </button>
+      </template>
     </ul>
   </div>
 </template>
 
 <script>
+import { useAuth } from '@/composables/useAuth';
+
 export default {
   name: 'SidebarNav',
   props: {
@@ -30,9 +39,9 @@ export default {
       required: true,
     },
   },
+  setup() {
+    const { handleLogout } = useAuth();
+    return { handleLogout };
+  },
 };
 </script>
-
-<style scoped>
-
-</style>

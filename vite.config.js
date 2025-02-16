@@ -10,10 +10,10 @@ export default defineConfig({
   ],
   server: {
     host: true,
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 5173
   },
   preview: {
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 5173,
     host: true,
     allowedHosts: [
       'healthcheck.railway.app',

@@ -12,6 +12,7 @@ const routes = [
         component: SignUpView,
         name: routeNames.SignUpView,
         meta: {
+            isPublic: false,
             hideSidebar: true
         }
     },
@@ -20,6 +21,7 @@ const routes = [
         component: SignInView,
         name: routeNames.SignInView,
         meta: {
+            isPublic: false,
             hideSidebar: true
         }
     },
