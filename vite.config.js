@@ -10,7 +10,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
-  base: '/',
+  base: '/daily-quote-admin/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
