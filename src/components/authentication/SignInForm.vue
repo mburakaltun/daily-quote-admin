@@ -50,7 +50,6 @@
 import AppInputText from "@/components/common/AppInputText.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
-import authenticationService from "@/services/authenticationService.js";
 import authenticationUrls from "@/urls/authenticationUrls.js";
 import AppInputPassword from "@/components/common/AppInputPassword.vue";
 import {useRouter} from 'vue-router';
@@ -58,6 +57,7 @@ import routeNames from "@/router/routeNames.js";
 import appConstants from "@/constants/appConstants.js";
 import {useToast} from "vue-toastification";
 import redirect from "@/services/redirect.js";
+import axiosInstance from "@/services/axiosInstance.js";
 
 export default {
   name: 'SignInForm',
@@ -97,7 +97,7 @@ export default {
           email: this.email,
           password: this.password
         };
-        const response = await authenticationService.post(authenticationUrls.signIn, requestBody);
+        const response = await axiosInstance.post(authenticationUrls.signIn, requestBody);
         console.log('Response data:', response);
         if (response.data.data.authenticationToken) {
           localStorage.setItem(appConstants.storageKeys.authenticationToken, response.data.data.authenticationToken);

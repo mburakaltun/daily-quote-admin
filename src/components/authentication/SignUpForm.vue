@@ -63,13 +63,13 @@
 import AppInputText from "@/components/common/AppInputText.vue";
 import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
-import authenticationService from "@/services/authenticationService.js";
 import authenticationUrls from "@/urls/authenticationUrls.js";
 import AppInputPassword from "@/components/common/AppInputPassword.vue";
 import { useRouter } from 'vue-router';
 import routeNames from "@/router/routeNames.js";
 import redirect from "@/services/redirect.js";
 import {useToast} from "vue-toastification";
+import axiosInstance from "@/services/axiosInstance.js";
 
 export default {
   name: 'SignUpForm',
@@ -108,7 +108,7 @@ export default {
       }
       this.isLoading = true;
       try {
-        const response = await authenticationService.post(authenticationUrls.signUp, {
+        const response = await axiosInstance.post(authenticationUrls.signUp, {
           email: this.email,
           password: this.password,
           confirmPassword: this.confirmPassword,

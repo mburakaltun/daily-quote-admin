@@ -1,4 +1,4 @@
 export default {
-  signIn: '/signIn',
-  signUp: '/signUp'
+  signIn: '/authentication/signIn',
+  signUp: '/authentication/signUp'
 };

@@ -14,9 +14,7 @@
                 id="quote"
                 placeholder="Enter your quote here..."
                 v-model="formData.content"
-                :class="{ 'border-red-500': errors.content }"
             />
-            <p v-if="errors.content" class="text-red-500 text-sm mt-1">Quote is required.</p>
           </div>
           <div>
             <AppLabel inputId="turkishQuote" text="Quote (Turkish)" size="medium"></AppLabel>
@@ -24,9 +22,7 @@
                 id="turkishQuote"
                 placeholder="Enter Turkish translation..."
                 v-model="formData.contentTr"
-                :class="{ 'border-red-500': errors.contentTr }"
             />
-            <p v-if="errors.contentTr" class="text-red-500 text-sm mt-1">Turkish quote is required.</p>
           </div>
         </div>
 
@@ -154,9 +150,9 @@ import AppTextarea from "@/components/common/AppTextArea.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
 import AppDropdown from "@/components/common/AppDropdown.vue";
 import AppToggle from "@/components/common/AppToggle.vue";
-import quoteService from "@/services/quoteService";
 import quoteUrls from "@/urls/quoteUrls";
 import {useToast} from "vue-toastification";
+import axiosInstance from "@/services/axiosInstance.js";
 
 export default {
   name: 'UpdateQuoteFormModal',
@@ -233,8 +229,6 @@ export default {
   methods: {
     validateForm() {
       this.errors = {};
-      if (!this.formData.content.trim()) this.errors.content = true;
-      if (!this.formData.contentTr.trim()) this.errors.contentTr = true;
       if (!this.formData.authorName.trim()) this.errors.authorName = true;
       if (!this.formData.quoteTypeName) this.errors.quoteTypeName = true;
       if (!this.formData.quoteCategoryName.trim()) this.errors.quoteCategoryName = true;
@@ -261,13 +255,13 @@ export default {
       };
 
       try {
-        await quoteService.put(quoteUrls.updateQuote, requestBody);
+        await axiosInstance.put(quoteUrls.updateQuote, requestBody);
         this.toast.success('Quote updated successfully');
         this.$emit('quote-updated');
         this.closeModal();
       } catch (error) {
-        console.error(error);
-        this.toast.error('Failed to update quote');
+        console.error("Update quote error:", error);
+        this.toast.error(error.response?.data?.message || 'Failed to create quote');
       } finally {
         this.isLoading = false;
       }

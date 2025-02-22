@@ -11,9 +11,7 @@
               id="quote"
               placeholder="Enter your quote here..."
               v-model="content"
-              :class="{ 'border-red-500': errors.content }"
           />
-          <p v-if="errors.content" class="text-red-500 text-sm mt-1">Quote is required.</p>
         </div>
         <div>
           <AppLabel inputId="turkishQuote" text="Quote (Turkish)" size="medium"></AppLabel>
@@ -21,9 +19,7 @@
               id="turkishQuote"
               placeholder="Enter Turkish translation..."
               v-model="contentTr"
-              :class="{ 'border-red-500': errors.contentTr }"
           />
-          <p v-if="errors.contentTr" class="text-red-500 text-sm mt-1">Turkish quote is required.</p>
         </div>
       </div>
 
@@ -153,10 +149,10 @@ import AppButton from "@/components/common/AppButton.vue";
 import AppTextarea from "@/components/common/AppTextArea.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
 import AppDropdown from "@/components/common/AppDropdown.vue";
-import quoteService from "@/services/quoteService";
 import quoteUrls from "@/urls/quoteUrls";
 import {useToast} from "vue-toastification";
 import AppToggle from "@/components/common/AppToggle.vue";
+import axiosInstance from "@/services/axiosInstance.js";
 
 export default {
   name: 'CreateQuoteForm',
@@ -192,8 +188,6 @@ export default {
     validateForm() {
       this.errors = {};
 
-      if (!this.content.trim()) this.errors.content = true;
-      if (!this.contentTr.trim()) this.errors.contentTr = true;
       if (!this.authorName.trim()) this.errors.authorName = true;
       if (!this.quoteTypeName) this.errors.quoteTypeName = true;
       if (!this.quoteCategoryName.trim()) this.errors.quoteCategoryName = true;
@@ -222,14 +216,13 @@ export default {
       };
 
       try {
-        const response = await quoteService.post(quoteUrls.createQuote, requestBody);
+        const response = await axiosInstance.post(quoteUrls.createQuote, requestBody);
         console.log('Response:', response);
         this.toast.success('Quote created successfully.');
         this.$emit('quote-created');
         this.resetForm();
       } catch (error) {
-        console.log(error);
-        this.toast.error('Failed to create quote.');
+        this.toast.error(error.response?.data?.message || 'Failed to create quote');
       } finally {
         this.isLoading = false;
       }

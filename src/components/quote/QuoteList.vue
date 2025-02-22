@@ -44,11 +44,11 @@
 <script>
 import AppButton from "@/components/common/AppButton.vue";
 import AppHeading from "@/components/common/AppHeading.vue";
-import quoteService from '@/services/quoteService.js';
 import quoteUrls from "@/urls/quoteUrls.js";
 import UpdateQuoteFormModal from "@/components/quote/UpdateQuoteFormModal.vue";
 import ConfirmDialog from "@/components/common/AppConfirmDialog.vue";
 import {useToast} from "vue-toastification";
+import axiosInstance from "@/services/axiosInstance.js";
 
 export default {
   components: {
@@ -76,7 +76,7 @@ export default {
     async fetchQuotes() {
       try {
         this.isLoading = true;
-        const response = await quoteService.get(quoteUrls.getAllQuotes);
+        const response = await axiosInstance.get(quoteUrls.getAllQuotes);
         this.quotes = response.data.data.quoteDTOList;
       } catch (error) {
         this.toast.error('Failed to fetch quotes');
@@ -95,7 +95,7 @@ export default {
     },
     async deleteQuote() {
       try {
-        await quoteService.delete(`${quoteUrls.deleteQuote}/${this.quoteToDelete.id}`);
+        await axiosInstance.delete(`${quoteUrls.deleteQuote}/${this.quoteToDelete.id}`);
         this.toast.success('Quote deleted successfully');
         await this.fetchQuotes();
       } catch (error) {
